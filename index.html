@@ -33,8 +33,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
 
-    <!-- -->
-    <!-- HEADER -->
+    <!-- HEADER UTAMA -->
     <header class="bg-white border-b border-cyan-100 sticky top-0 z-40 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -58,14 +57,13 @@
                 <div class="flex items-center gap-2">
                     <span id="current-time-display" class="hidden md:inline-block text-xs font-bold bg-slate-100 text-slate-600 px-3 py-1.5 rounded-full border border-slate-200"></span>
                     <button onclick="bukaPanelMonitorDosen()" class="text-xs font-bold bg-cyan-50 text-cyan-700 hover:bg-cyan-100 px-3.5 py-1.5 rounded-xl border border-cyan-200 transition-all flex items-center gap-1.5">
-                        <i data-lucide="monitor" class="w-4 h-4"></i> Monitor Dosen
+                        <i data-lucide="monitor" class="w-4 h-4"></i> Panel Dosen
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- -->
     <!-- MAIN WRAPPER FOR MULTI-STEP VIEWS -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full flex flex-col justify-center">
 
@@ -78,7 +76,7 @@
                     </div>
                     <h2 class="text-2xl font-black text-slate-900">Portal Mahasiswa</h2>
                     <p class="text-xs text-slate-500">Mata Kuliah: <strong class="text-cyan-600">Pendidikan Rekreasi dan Outbond</strong></p>
-                    <p class="text-[11px] text-slate-400">Silakan masukkan NIM Anda untuk memvalidasi data kehadiran.</p>
+                    <p class="text-[11px] text-slate-400">Silakan cari nama atau masukkan NIM Anda untuk memulai absen hari ini.</p>
                 </div>
 
                 <div class="space-y-4">
@@ -99,7 +97,7 @@
                     </div>
 
                     <!-- Selected Student Preview -->
-                    <div id="selected-student-box" class="hidden p-4 bg-cyan-50/50 rounded-xl border border-cyan-100 flex items-center gap-3">
+                    <div id="selected-student-box" class="hidden p-4 bg-cyan-50/50 rounded-xl border border-cyan-100 flex items-center gap-3 animate-fade-in">
                         <div class="w-10 h-10 rounded-full bg-cyan-600 text-white flex items-center justify-center font-bold text-sm" id="selected-student-avatar">
                             -
                         </div>
@@ -107,7 +105,7 @@
                             <h4 class="text-xs font-black text-slate-800 truncate" id="selected-student-name">Nama Mahasiswa</h4>
                             <p class="text-[10px] font-bold text-cyan-600" id="selected-student-nim">NIM: -</p>
                         </div>
-                        <button onclick="resetPilihanSiswa()" class="text-slate-400 hover:text-rose-500">
+                        <button onclick="resetPilihanSiswa()" class="text-slate-400 hover:text-rose-500 p-1">
                             <i data-lucide="x" class="w-4 h-4"></i>
                         </button>
                     </div>
@@ -124,7 +122,6 @@
             </div>
         </section>
 
-        <!-- -->
         <!-- STEP 2: DASHBOARD AREA ABSEN (MATA KULIAH, DOSEN, FACE CAPTURE) -->
         <section id="step-dashboard-absen" class="hidden w-full space-y-6">
             
@@ -135,8 +132,8 @@
                         U
                     </div>
                     <div>
-                        <h3 class="text-lg font-black" id="mhs-nama-display">Andi Iksal Tehuayo</h3>
-                        <p class="text-xs text-cyan-200" id="mhs-nim-display">NIM: 202438034</p>
+                        <h3 class="text-lg font-black" id="mhs-nama-display">Nama Mahasiswa</h3>
+                        <p class="text-xs text-cyan-200" id="mhs-nim-display">NIM: -</p>
                         <p class="text-[10px] text-cyan-300 font-semibold bg-cyan-900/40 py-0.5 px-2.5 rounded-full mt-1.5 inline-block">Prodi: Pend. Jasmani, Kesehatan & Rekreasi (Kelas C)</p>
                     </div>
                 </div>
@@ -154,7 +151,7 @@
                             <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
                                 <i data-lucide="book-open" class="text-cyan-600 w-5 h-5"></i> Detail Sesi Perkuliahan
                             </h4>
-                            <p class="text-xs text-slate-500">Data mata kuliah Anda hari ini sesuai jadwal SIAKAD.</p>
+                            <p class="text-xs text-slate-500">Mata kuliah Anda hari ini yang sedang berlangsung aktif.</p>
                         </div>
 
                         <!-- Pemilihan Mata Kuliah (Disabled / Predefined) -->
@@ -183,15 +180,14 @@
                     <!-- KOTAK RIWAYAT SINGKAT USER INI -->
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
                         <h4 class="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                            <i data-lucide="history" class="text-cyan-600 w-4 h-4"></i> Riwayat Absensi Anda Hari Ini
+                            <i data-lucide="history" class="text-cyan-600 w-4 h-4"></i> Bukti Absensi Anda Hari Ini
                         </h4>
-                        <div id="mhs-riwayat-list" class="space-y-3 max-h-[220px] overflow-y-auto custom-scrollbar">
-                            <!-- Riwayat pribadi diisi dinamis -->
+                        <div id="mhs-riwayat-list" class="space-y-3">
+                            <!-- Diisi dinamis jika sudah absen -->
                         </div>
                     </div>
                 </div>
 
-                <!-- -->
                 <!-- KOLOM KANAN (DOKUMENTASI FACE DI KELAS) -->
                 <div class="lg:col-span-6 space-y-6">
                     <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm flex flex-col justify-between">
@@ -199,7 +195,7 @@
                             <h4 class="text-base font-bold text-slate-900 flex items-center gap-2">
                                 <i data-lucide="camera" class="text-cyan-600 w-5 h-5"></i> Dokumentasi Wajah di Kelas
                             </h4>
-                            <p class="text-xs text-slate-500">Ambil foto wajah Anda langsung di ruang kelas sebagai validasi absensi fisik.</p>
+                            <p class="text-xs text-slate-500">Ambil foto wajah Anda langsung di ruang kelas sebagai validasi kehadiran hari ini.</p>
                         </div>
 
                         <!-- CAMERA / LIVE CAPTURE CONTAINER -->
@@ -208,7 +204,7 @@
                             <video id="webcam" autoplay playsinline class="w-full h-full object-cover"></video>
                             
                             <!-- Captured Photo Preview -->
-                            <img id="captured-preview" class="hidden w-full h-full object-cover absolute inset-0 z-10" src="">
+                            <img id="captured-preview" class="hidden w-full h-full object-cover absolute inset-0 z-10 animate-fade-in" src="">
 
                             <!-- Canvas tersembunyi untuk capture gambar -->
                             <canvas id="canvas-helper" class="hidden"></canvas>
@@ -241,7 +237,7 @@
         </section>
 
         <!-- STEP 3: SUCCESS VIEW -->
-        <section id="step-sukses" class="hidden w-full max-w-md mx-auto text-center space-y-6">
+        <section id="step-sukses" class="hidden w-full max-w-md mx-auto text-center space-y-6 animate-scale-up">
             <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-xl">
                 <div class="w-20 h-20 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
                     <i data-lucide="badge-check" class="w-12 h-12"></i>
@@ -284,17 +280,19 @@
             </div>
         </section>
 
-        <!-- -->
         <!-- STEP 4: PANEL MONITOR DOSEN (REKAP DATA & EXPORT EXCEL) -->
         <section id="step-monitor-dosen" class="hidden w-full space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                     <h2 class="text-2xl font-extrabold text-slate-950 flex items-center gap-2">
-                        <i data-lucide="shield-alert" class="text-cyan-600 w-7 h-7"></i> Panel Monitor & Jurnal Kehadiran
+                        <i data-lucide="shield-alert" class="text-cyan-600 w-7 h-7"></i> Panel Monitor Dosen
                     </h2>
-                    <p class="text-xs text-slate-500">Pemantauan persentase kehadiran, unduh laporan, serta rekap harian Kelas C.</p>
+                    <p class="text-xs text-slate-500">Pemantauan persentase kehadiran, kelola kehadiran manual, serta rekap harian Kelas C.</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
+                    <button onclick="bukaKonfirmasiResetSesi()" class="text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 px-4 py-2.5 rounded-xl border border-rose-200 transition-all flex items-center gap-1.5">
+                        <i data-lucide="refresh-ccw" class="w-4 h-4"></i> Mulai Sesi Baru
+                    </button>
                     <button onclick="eksporKeExcel()" class="text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl shadow-md shadow-emerald-100 transition-all flex items-center gap-1.5">
                         <i data-lucide="file-spreadsheet" class="w-4 h-4"></i> Ekspor CSV / Excel
                     </button>
@@ -304,42 +302,48 @@
                 </div>
             </div>
 
-            <!-- Ringkasan Kelas & Persentase Sesi -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Ringkasan Sesi Hari Ini -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                    <span class="text-xs text-slate-400 font-bold block mb-1">Total Sesi Kuliah</span>
-                    <span class="text-3xl font-black text-slate-900">11 Sesi</span>
+                    <span class="text-xs text-slate-400 font-bold block mb-1">Mata Kuliah</span>
+                    <span class="text-sm font-extrabold text-slate-900 block truncate" title="Pendidikan Rekreasi dan Outbond">Pend. Rekreasi & Outbond</span>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                    <span class="text-xs text-slate-400 font-bold block mb-1">Mahasiswa Kelas C</span>
+                    <span class="text-xs text-slate-400 font-bold block mb-1">Total Mahasiswa Kelas C</span>
                     <span class="text-3xl font-black text-slate-900">25 Orang</span>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                    <span class="text-xs text-emerald-500 font-bold block mb-1">Sudah Absen Hari Ini</span>
+                    <span class="text-xs text-emerald-500 font-bold block mb-1">Sudah Hadir Hari Ini</span>
                     <span id="monitor-total-hadir-today" class="text-3xl font-black text-emerald-600">0</span>
                 </div>
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-                    <span class="text-xs text-rose-500 font-bold block mb-1">Alpa Hari Ini (Belum Absen)</span>
-                    <span id="monitor-total-alpa-today" class="text-3xl font-black text-rose-600">25</span>
+                    <span class="text-xs text-amber-500 font-bold block mb-1">Belum Melakukan Absen</span>
+                    <span id="monitor-total-alpa-today" class="text-3xl font-black text-amber-600">25</span>
                 </div>
             </div>
 
             <!-- Tabel Monitoring 25 Mahasiswa Terdaftar -->
             <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-                <div class="p-6 border-b border-slate-100">
-                    <h3 class="text-base font-bold text-slate-900">Status Absensi Mahasiswa</h3>
-                    <p class="text-xs text-slate-500">Daftar lengkap 25 mahasiswa beserta status absensi harian mereka saat ini.</p>
+                <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Daftar Status Absensi Mahasiswa</h3>
+                        <p class="text-xs text-slate-500">Klik tombol status (H/I/S/A) untuk mengedit kehadiran secara manual.</p>
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-slate-50 p-1.5 rounded-xl border border-slate-200 text-xs font-semibold">
+                        <span class="text-slate-400 pl-1.5">Set semua hari ini:</span>
+                        <button onclick="setSemuaKehadiranSesi('Hadir')" class="px-2.5 py-1 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-all">Hadir</button>
+                        <button onclick="setSemuaKehadiranSesi('Belum Absen')" class="px-2.5 py-1 text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all">Reset</button>
+                    </div>
                 </div>
                 <div class="overflow-x-auto custom-scrollbar">
-                    <table class="w-full min-w-[800px]">
+                    <table class="w-full min-w-[850px]">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-100 text-left">
                                 <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">No</th>
                                 <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider">NIM</th>
                                 <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Nama Mahasiswa</th>
-                                <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Hadir (SIAKAD)</th>
-                                <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Persentase</th>
-                                <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Status Hari Ini</th>
+                                <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Kehadiran Hari Ini</th>
+                                <th class="py-4 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center w-[180px]">Kelola Manual</th>
                                 <th class="py-4 px-6 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Bukti Foto</th>
                             </tr>
                         </thead>
@@ -356,50 +360,66 @@
     <!-- TOAST NOTIFICATION UTILITY -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 max-w-sm pointer-events-none"></div>
 
+    <!-- DIALOG MODAL CUSTOM (NOTIFIKASI / KONFIRMASI) -->
+    <div id="modal-container" class="fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 text-center transform scale-95 transition-all">
+            <div id="modal-icon-box" class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 bg-cyan-50 text-cyan-600">
+                <i data-lucide="help-circle" class="w-7 h-7"></i>
+            </div>
+            <h3 id="modal-title" class="text-base font-extrabold text-slate-900 mb-1">Judul Konfirmasi</h3>
+            <p id="modal-desc" class="text-xs text-slate-500 mb-6">Penjelasan atau instruksi konfirmasi ditaruh di sini.</p>
+            <div id="modal-action-buttons" class="flex gap-2">
+                <!-- Tombol dinonaktifkan / disisipkan dinamis via JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-6 w-full mt-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-xs text-slate-400 font-medium">© 2026 Universitas Pattimura. Jurnal & Sistem Absensi Terintegrasi.</p>
+            <p class="text-xs text-slate-400 font-medium">© 2026 Universitas Pattimura. Jurnal & Sistem Absensi Kelas C Terintegrasi.</p>
         </div>
     </footer>
 
-    <!-- -->
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- DATA UTAMA: 25 MAHASISWA KELAS C ---
+        // --- DATA UTAMA: 25 MAHASISWA KELAS C (MULAI DARI NOL BERSIH) ---
         const DATABASE_MAHASISWA = [
-            { nim: "202438034", nama: "Andi Iksal Tehuayo", hadirSiakad: 5 },
-            { nim: "202438006", nama: "Chelsea Victoria Sajojo Bones Teniwut", hadirSiakad: 7 },
-            { nim: "202438039", nama: "Ridwan Ulath", hadirSiakad: 8 },
-            { nim: "202438045", nama: "Sofyan Agus Latukau", hadirSiakad: 6 },
-            { nim: "202438015", nama: "Intan Ramadani", hadirSiakad: 5 },
-            { nim: "202438024", nama: "Markus Christo Betaubun", hadirSiakad: 8 },
-            { nim: "202438009", nama: "Andini", hadirSiakad: 8 },
-            { nim: "202438011", nama: "Ferderika Dawan", hadirSiakad: 7 },
-            { nim: "202438028", nama: "Wa Ode Aswi", hadirSiakad: 8 },
-            { nim: "202438005", nama: "Chintya Talahatu", hadirSiakad: 7 },
-            { nim: "202438087", nama: "Hidayat Keliobas", hadirSiakad: 2 },
-            { nim: "202438035", nama: "Rati Umasugi", hadirSiakad: 8 },
-            { nim: "202438051", nama: "Said Zakir Alatas", hadirSiakad: 6 },
-            { nim: "202438012", nama: "Indah Syarifa Sagena", hadirSiakad: 7 },
-            { nim: "202438019", nama: "Andreas Del Piero Renyaan", hadirSiakad: 8 },
-            { nim: "202438022", nama: "Vindy Nesyanti Putri", hadirSiakad: 9 },
-            { nim: "202438013", nama: "Syahril Sidik", hadirSiakad: 8 },
-            { nim: "202438080", nama: "Sujialim Tamrin", hadirSiakad: 9 },
-            { nim: "202438032", nama: "Anggun Juliyani", hadirSiakad: 8 },
-            { nim: "202438021", nama: "Destiyan", hadirSiakad: 9 },
-            { nim: "202238001", nama: "UMI KALSUM ELIAN", hadirSiakad: 0 },
-            { nim: "202438053", nama: "Yusril Sofyan", hadirSiakad: 8 },
-            { nim: "202438041", nama: "Feron Hendra Liulessy", hadirSiakad: 5 },
-            { nim: "202138063", nama: "MOZYO RUPILU", hadirSiakad: 0 },
-            { nim: "202438062", nama: "Abdul Karim Daeng Matally", hadirSiakad: 4 }
+            { nim: "202438034", nama: "Andi Iksal Tehuayo" },
+            { nim: "202438006", nama: "Chelsea Victoria Sajojo Bones Teniwut" },
+            { nim: "202438039", nama: "Ridwan Ulath" },
+            { nim: "202438045", nama: "Sofyan Agus Latukau" },
+            { nim: "202438015", nama: "Intan Ramadani" },
+            { nim: "202438024", nama: "Markus Christo Betaubun" },
+            { nim: "202438009", nama: "Andini" },
+            { nim: "202438011", nama: "Ferderika Dawan" },
+            { nim: "202438028", nama: "Wa Ode Aswi" },
+            { nim: "202438005", nama: "Chintya Talahatu" },
+            { nim: "202438087", nama: "Hidayat Keliobas" },
+            { nim: "202438035", nama: "Rati Umasugi" },
+            { nim: "202438051", nama: "Said Zakir Alatas" },
+            { nim: "202438012", nama: "Indah Syarifa Sagena" },
+            { nim: "202438019", nama: "Andreas Del Piero Renyaan" },
+            { nim: "202438022", nama: "Vindy Nesyanti Putri" },
+            { nim: "202438013", nama: "Syahril Sidik" },
+            { nim: "202438080", nama: "Sujialim Tamrin" },
+            { nim: "202438032", nama: "Anggun Juliyani" },
+            { nim: "202438021", nama: "Destiyan" },
+            { nim: "202238001", nama: "UMI KALSUM ELIAN" },
+            { nim: "202438053", nama: "Yusril Sofyan" },
+            { nim: "202438041", nama: "Feron Hendra Liulessy" },
+            { nim: "202138063", nama: "MOZYO RUPILU" },
+            { nim: "202438062", nama: "Abdul Karim Daeng Matally" }
         ];
 
-        // --- STATE APLIKASI ---
+        // --- STATE UTAMA ---
         let studentAktif = null; // Menyimpan data mahasiswa saat ini yang log in
         let streamKamera = null; // Menyimpan stream webcam
         let fotoTerpilihBase64 = null; // Menyimpan base64 foto dokumentasi wajah
-        let riwayatSesiAbsen = []; // Database lokal untuk absen hari ini
+        
+        // Database absensi lokal hari ini
+        // Format isi objek: { nim: "...", nama: "...", status: "Hadir"/"Izin"/"Sakit"/"Alpa", waktu: "HH:MM", foto: "base64" }
+        let riwayatSesiAbsen = []; 
 
         window.onload = function() {
             lucide.createIcons();
@@ -421,7 +441,7 @@
             }
         }
 
-        //        // --- AUTOCOMPLETE PENCARIAN MAHASISWA (NIM ATAU NAMA) ---
+        // --- AUTOCOMPLETE PENCARIAN MAHASISWA (NIM ATAU NAMA) ---
         function cariAutocompleteSiswa() {
             const input = document.getElementById('login-nim-input').value.toLowerCase().trim();
             const listContainer = document.getElementById('autocomplete-list');
@@ -484,11 +504,11 @@
             studentAktif = mhsTerpilih;
             localStorage.setItem('unpatti_student_session', JSON.stringify(studentAktif));
 
-            showToast(`Berhasil masuk, selamat belajar ${studentAktif.nama}!`, "success");
+            showToast(`Selamat datang, ${studentAktif.nama}!`, "success");
             masukDashboardAbsen();
         }
 
-        //        // --- SETUP AREA DASHBOARD ABSENSI ---
+        // --- SETUP AREA DASHBOARD ABSENSI ---
         function masukDashboardAbsen() {
             document.getElementById('mhs-nama-display').innerText = studentAktif.nama;
             document.getElementById('mhs-nim-display').innerText = `NIM: ${studentAktif.nim}`;
@@ -536,8 +556,7 @@
 
                 video.srcObject = streamKamera;
             } catch (error) {
-                console.error("Kesalahan akses kamera perangkat: ", error);
-                showToast("Kamera tidak terdeteksi / diizinkan. Menggunakan Mode Simulasi Kamera.", "warning");
+                console.warn("Kesalahan akses kamera perangkat. Beralih ke mode simulasi.", error);
                 simulasiKameraWeb();
             }
         }
@@ -554,13 +573,14 @@
             video.classList.add('hidden');
 
             const preview = document.getElementById('captured-preview');
-            // Mock placeholder image representing classmate presence verification
-            preview.src = "https://placehold.co/640x480/0e7490/ffffff?text=Kamera+Simulasi+(Hadir+Outbond)";
+            // Menghasilkan placeholder simulasi wajah unik per siswa
+            const namaSiswaClean = studentAktif ? encodeURIComponent(studentAktif.nama) : 'User';
+            preview.src = `https://placehold.co/640x480/0e7490/ffffff?text=${namaSiswaClean}+[TERVERIFIKASI]`;
             preview.classList.remove('hidden');
 
             fotoTerpilihBase64 = preview.src;
 
-            // Set control buttons
+            // Set kontrol tombol
             document.getElementById('btn-capture').classList.add('hidden');
             document.getElementById('btn-retake').classList.remove('hidden');
             document.getElementById('btn-submit-presensi').classList.remove('hidden');
@@ -573,7 +593,8 @@
             const preview = document.getElementById('captured-preview');
 
             if (!streamKamera) {
-                showToast("Kamera aktif tidak terdeteksi!", "error");
+                showToast("Kamera tidak aktif! Menggunakan Mode Simulasi Kamera.", "warning");
+                simulasiKameraWeb();
                 return;
             }
 
@@ -585,7 +606,6 @@
             // Efek cermin/mirror selfie agar natural
             ctx.translate(canvas.width, 0);
             ctx.scale(-1, 1);
-
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
             // Ekstrak base64 jpeg
@@ -614,7 +634,7 @@
             document.getElementById('btn-submit-presensi').classList.add('hidden');
         }
 
-        //        // --- TRANSAKSI PRESENSI ---
+        // --- TRANSAKSI PRESENSI ---
         function kirimPresensi() {
             const matkul = document.getElementById('absen-matkul').value;
             const dosen = document.getElementById('absen-dosen').value;
@@ -627,15 +647,8 @@
             const jamSekarang = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             const tanggalSekarang = new Date().toISOString().split('T')[0];
 
-            // Cek jika NIM yang sama sudah login & absen hari ini
-            const cekAbsensiSama = riwayatSesiAbsen.some(
-                item => item.nim === studentAktif.nim && item.tanggal === tanggalSekarang
-            );
-
-            if (cekAbsensiSama) {
-                showToast("Anda sudah mengirimkan absensi untuk perkuliahan hari ini!", "warning");
-                return;
-            }
+            // Filter riwayat lama dan ganti dengan presensi baru hari ini
+            riwayatSesiAbsen = riwayatSesiAbsen.filter(item => item.nim !== studentAktif.nim);
 
             // Simpan log absensi baru
             const dataAbsenBaru = {
@@ -646,6 +659,7 @@
                 dosen: dosen,
                 tanggal: tanggalSekarang,
                 waktu: jamSekarang,
+                status: "Hadir", // Default dari face capture adalah Hadir
                 foto: fotoTerpilihBase64
             };
 
@@ -661,7 +675,7 @@
 
             nonaktifkanKamera();
             gantiTampilanKe('step-sukses');
-            showToast("Absensi berhasil terkirim ke server SIAKAD!", "success");
+            showToast("Absensi berhasil terkirim!", "success");
         }
 
         function kembaliKeAreaAbsen() {
@@ -677,44 +691,42 @@
 
         // --- SISTEM LOCAL STORAGE ---
         function ambilDataAbsenLokal() {
-            const dataAbsenSesi = localStorage.getItem('unpatti_jurnal_absen');
+            const dataAbsenSesi = localStorage.getItem('unpatti_jurnal_absen_clean');
             if (dataAbsenSesi) {
                 riwayatSesiAbsen = JSON.parse(dataAbsenSesi);
             }
         }
 
         function simpanAbsenKeLokal() {
-            localStorage.setItem('unpatti_jurnal_absen', JSON.stringify(riwayatSesiAbsen));
+            localStorage.setItem('unpatti_jurnal_absen_clean', JSON.stringify(riwayatSesiAbsen));
         }
 
-        //        // --- DISPLAY RIWAYAT USER AKTIF ---
+        // --- DISPLAY RIWAYAT USER AKTIF ---
         function renderRiwayatPribadi() {
             const container = document.getElementById('mhs-riwayat-list');
             container.innerHTML = '';
 
-            const dataKu = riwayatSesiAbsen.filter(item => item.nim === studentAktif.nim);
+            const dataKu = riwayatSesiAbsen.find(item => item.nim === studentAktif.nim);
 
-            if (dataKu.length === 0) {
+            if (!dataKu) {
                 container.innerHTML = `
                     <div class="p-6 text-center border-2 border-dashed border-slate-100 rounded-xl">
-                        <p class="text-xs text-slate-400 italic">Belum ada rekaman kehadiran hari ini.</p>
+                        <p class="text-xs text-slate-400 italic">Anda belum melakukan rekaman kehadiran untuk sesi hari ini.</p>
                     </div>
                 `;
                 return;
             }
 
-            dataKu.forEach(item => {
-                container.innerHTML += `
-                    <div class="flex gap-3 items-center p-3 bg-slate-50 rounded-xl border border-slate-100">
-                        <img src="${item.foto}" class="w-12 h-12 rounded-lg object-cover border border-slate-200" alt="Face" />
-                        <div class="flex-1 min-w-0">
-                            <span class="text-xs font-black text-slate-800 block truncate">${item.mataKuliah}</span>
-                            <span class="text-[10px] text-slate-400 block truncate">${item.dosen}</span>
-                            <span class="text-[9px] font-bold text-cyan-600 block mt-0.5">${item.tanggal} • ${item.waktu} WIB</span>
-                        </div>
+            container.innerHTML = `
+                <div class="flex gap-3 items-center p-3 bg-cyan-50/50 rounded-xl border border-cyan-100">
+                    <img src="${dataKu.foto}" class="w-12 h-12 rounded-lg object-cover border border-slate-200" alt="Face" />
+                    <div class="flex-1 min-w-0">
+                        <span class="text-xs font-black text-slate-800 block truncate">${dataKu.mataKuliah}</span>
+                        <span class="text-[10px] text-slate-400 block truncate">${dataKu.status} • Terverifikasi Sistem</span>
+                        <span class="text-[9px] font-bold text-cyan-600 block mt-0.5">${dataKu.tanggal} • ${dataKu.waktu} WIT</span>
                     </div>
-                `;
-            });
+                </div>
+            `;
         }
 
         // --- PANEL DOSEN MONITOR ---
@@ -730,56 +742,32 @@
             tbody.innerHTML = '';
 
             let jumlahSudahHadirHariIni = 0;
-            const tanggalSekarang = new Date().toISOString().split('T')[0];
 
             DATABASE_MAHASISWA.forEach((mhs, index) => {
-                // Cek apakah mahasiswa ini sudah absen di data lokal hari ini
-                const dataAbsenSiswaHariIni = riwayatSesiAbsen.find(
-                    absen => absen.nim === mhs.nim && absen.tanggal === tanggalSekarang
-                );
+                // Cek status mahasiswa saat ini di dalam riwayat sesi lokal
+                const statusSesi = riwayatSesiAbsen.find(item => item.nim === mhs.nim);
 
-                let statusHariIniBadge = '';
-                let aksiFotoCell = '';
-                let totalSesiKehadiranPlusHariIni = mhs.hadirSiakad;
+                let statusText = 'Belum Absen';
+                let classBadge = 'bg-slate-100 text-slate-600 border-slate-200';
+                let aksiFotoCell = `<span class="text-[10px] text-slate-300 italic">No Photo</span>`;
 
-                if (dataAbsenSiswaHariIni) {
-                    jumlahSudahHadirHariIni++;
-                    totalSesiKehadiranPlusHariIni += 1; // Ditambah 1 karena sudah hadir hari ini
-
-                    statusHariIniBadge = `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Hadir (${dataAbsenSiswaHariIni.waktu} WIB)
-                        </span>
-                    `;
-                    
-                    aksiFotoCell = `
-                        <div class="flex justify-center">
-                            <img src="${dataAbsenSiswaHariIni.foto}" class="w-10 h-10 object-cover rounded-lg border border-slate-200 shadow-sm" alt="Bukti Face" />
-                        </div>
-                    `;
-                } else {
-                    statusHariIniBadge = `
-                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-600 border border-rose-100">
-                            <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span> Belum Absen
-                        </span>
-                    `;
-                    
-                    aksiFotoCell = `
-                        <span class="text-[10px] text-slate-300 italic">No Photo</span>
-                    `;
-                }
-
-                // Kalkulasi Persentase Kehadiran total dari 11 Sesi
-                // Jika totalSesiKehadiranPlusHariIni melebihi 11, set ke 11 max.
-                const totalHadirFix = Math.min(totalSesiKehadiranPlusHariIni, 11);
-                const persentaseKehadiranNum = ((totalHadirFix / 11) * 100).toFixed(2);
-
-                // Buat styling text persentase
-                let persentaseColor = 'text-slate-700';
-                if (persentaseKehadiranNum < 50) {
-                    persentaseColor = 'text-rose-600 font-extrabold';
-                } else if (persentaseKehadiranNum >= 75) {
-                    persentaseColor = 'text-emerald-600 font-extrabold';
+                if (statusSesi) {
+                    statusText = statusSesi.status;
+                    if (statusText === 'Hadir') {
+                        jumlahSudahHadirHariIni++;
+                        classBadge = 'bg-emerald-50 text-emerald-700 border-emerald-100';
+                        aksiFotoCell = `
+                            <div class="flex justify-center">
+                                <img src="${statusSesi.foto}" class="w-10 h-10 object-cover rounded-lg border border-slate-200 shadow-sm" alt="Bukti Face" />
+                            </div>
+                        `;
+                    } else if (statusText === 'Izin') {
+                        classBadge = 'bg-amber-50 text-amber-700 border-amber-100';
+                    } else if (statusText === 'Sakit') {
+                        classBadge = 'bg-sky-50 text-sky-700 border-sky-100';
+                    } else if (statusText === 'Alpa') {
+                        classBadge = 'bg-rose-50 text-rose-700 border-rose-100';
+                    }
                 }
 
                 tbody.innerHTML += `
@@ -787,9 +775,20 @@
                         <td class="py-4 px-6 text-sm text-slate-400 font-bold text-center">${index + 1}</td>
                         <td class="py-4 px-4 text-xs font-bold text-slate-700">${mhs.nim}</td>
                         <td class="py-4 px-4 text-xs font-black text-slate-800">${mhs.nama}</td>
-                        <td class="py-4 px-4 text-xs font-bold text-slate-600 text-center">${totalHadirFix} / 11 Sesi</td>
-                        <td class="py-4 px-4 text-xs text-center ${persentaseColor}">${persentaseKehadiranNum}%</td>
-                        <td class="py-4 px-4 text-center">${statusHariIniBadge}</td>
+                        <td class="py-4 px-4 text-center">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border ${classBadge}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <!-- KELOLA MANUAL -->
+                        <td class="py-4 px-4 text-center">
+                            <div class="inline-flex rounded-lg border border-slate-200 p-0.5 bg-slate-50 gap-0.5">
+                                <button onclick="ubahStatusManual('${mhs.nim}', 'Hadir')" class="px-2 py-1 rounded text-[10px] font-black hover:bg-white text-emerald-600 transition-all ${statusText === 'Hadir' ? 'bg-white shadow-xs' : ''}">H</button>
+                                <button onclick="ubahStatusManual('${mhs.nim}', 'Izin')" class="px-2 py-1 rounded text-[10px] font-black hover:bg-white text-amber-600 transition-all ${statusText === 'Izin' ? 'bg-white shadow-xs' : ''}">I</button>
+                                <button onclick="ubahStatusManual('${mhs.nim}', 'Sakit')" class="px-2 py-1 rounded text-[10px] font-black hover:bg-white text-sky-600 transition-all ${statusText === 'Sakit' ? 'bg-white shadow-xs' : ''}">S</button>
+                                <button onclick="ubahStatusManual('${mhs.nim}', 'Alpa')" class="px-2 py-1 rounded text-[10px] font-black hover:bg-white text-rose-600 transition-all ${statusText === 'Alpa' ? 'bg-white shadow-xs' : ''}">A</button>
+                            </div>
+                        </td>
                         <td class="py-4 px-6 text-center">${aksiFotoCell}</td>
                     </tr>
                 `;
@@ -800,18 +799,94 @@
             document.getElementById('monitor-total-alpa-today').innerText = `${DATABASE_MAHASISWA.length - jumlahSudahHadirHariIni} Orang`;
         }
 
-        //        // --- EKSPOR DATA KE EXCEL/CSV ---
+        // --- UBAH STATUS MANUAL UNTUK DOSEN ---
+        function ubahStatusManual(nim, statusTarget) {
+            const mhs = DATABASE_MAHASISWA.find(item => item.nim === nim);
+            if (!mhs) return;
+
+            const jamSekarang = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const tanggalSekarang = new Date().toISOString().split('T')[0];
+
+            // Hapus data lama di sesi
+            riwayatSesiAbsen = riwayatSesiAbsen.filter(item => item.nim !== nim);
+
+            if (statusTarget !== 'Belum Absen') {
+                riwayatSesiAbsen.push({
+                    id: Date.now(),
+                    nama: mhs.nama,
+                    nim: mhs.nim,
+                    mataKuliah: "Pendidikan Rekreasi dan Outbond",
+                    dosen: "Dr. Bahmid Hasbullah, M.Pd & Mesak Hattu, S.Pd., M.Pd",
+                    tanggal: tanggalSekarang,
+                    waktu: jamSekarang,
+                    status: statusTarget,
+                    foto: `https://placehold.co/640x480/0284c7/ffffff?text=${statusTarget.toUpperCase()}+(Manual)`
+                });
+            }
+
+            simpanAbsenKeLokal();
+            renderMonitorBoardDosen();
+            showToast(`Status ${mhs.nama} berhasil diubah ke ${statusTarget}`, "success");
+        }
+
+        // --- SET SEMUA MAHASISWA SEKALIGUS ---
+        function setSemuaKehadiranSesi(statusTarget) {
+            const jamSekarang = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const tanggalSekarang = new Date().toISOString().split('T')[0];
+
+            if (statusTarget === 'Belum Absen') {
+                riwayatSesiAbsen = [];
+            } else {
+                riwayatSesiAbsen = DATABASE_MAHASISWA.map(mhs => ({
+                    id: Date.now(),
+                    nama: mhs.nama,
+                    nim: mhs.nim,
+                    mataKuliah: "Pendidikan Rekreasi dan Outbond",
+                    dosen: "Dr. Bahmid Hasbullah, M.Pd & Mesak Hattu, S.Pd., M.Pd",
+                    tanggal: tanggalSekarang,
+                    waktu: jamSekarang,
+                    status: statusTarget,
+                    foto: `https://placehold.co/640x480/10b981/ffffff?text=${statusTarget.toUpperCase()}+(Massal)`
+                }));
+            }
+
+            simpanAbsenKeLokal();
+            renderMonitorBoardDosen();
+            showToast("Berhasil melakukan perubahan massal status kehadiran.", "success");
+        }
+
+        // --- RESET JURNAL SESI ---
+        function bukaKonfirmasiResetSesi() {
+            tampilkanModal(
+                "Mulai Sesi Baru?",
+                "Tindakan ini akan menghapus seluruh rekaman kehadiran sementara hari ini dari memori. Apakah Anda yakin?",
+                () => {
+                    riwayatSesiAbsen = [];
+                    simpanAbsenKeLokal();
+                    renderMonitorBoardDosen();
+                    tutupModal();
+                    showToast("Sesi absen berhasil direset ke nol.", "success");
+                }
+            );
+        }
+
+        // --- EKSPOR DATA KE EXCEL/CSV ---
         function eksporKeExcel() {
             if (riwayatSesiAbsen.length === 0) {
                 showToast("Tidak ada rekaman data presensi hari ini yang bisa diekspor.", "warning");
                 return;
             }
 
-            let formatCsv = "Tanggal,Nama Mahasiswa,NIM,Mata Kuliah,Dosen,Jam Presensi\n";
+            let formatCsv = "Tanggal,Nama Mahasiswa,NIM,Mata Kuliah,Dosen,Status Kehadiran,Jam Presensi\n";
 
-            riwayatSesiAbsen.forEach(item => {
-                const namaClean = item.nama.replace(/,/g, '');
-                formatCsv += `${item.tanggal},"${namaClean}",${item.nim},"${item.mataKuliah}","${item.dosen}",${item.waktu}\n`;
+            DATABASE_MAHASISWA.forEach(mhs => {
+                const sesi = riwayatSesiAbsen.find(item => item.nim === mhs.nim);
+                const status = sesi ? sesi.status : 'Belum Absen';
+                const waktu = sesi ? sesi.waktu : '-';
+                const tanggal = sesi ? sesi.tanggal : '-';
+
+                const namaClean = mhs.nama.replace(/,/g, '');
+                formatCsv += `${tanggal},"${namaClean}",${mhs.nim},"Pendidikan Rekreasi dan Outbond","Dr. Bahmid Hasbullah M.Pd & Mesak Hattu S.Pd M.Pd",${status},${waktu}\n`;
             });
 
             // Trigger unduhan file .csv
@@ -827,7 +902,7 @@
             aLink.click();
             document.body.removeChild(aLink);
 
-            showToast("Laporan Jurnal Presensi berhasil diekspor ke format CSV/Excel!", "success");
+            showToast("Laporan Jurnal Presensi berhasil diekspor!", "success");
         }
 
         // --- UTILITI TAMPILAN PAGE ---
@@ -880,6 +955,26 @@
                     toast.remove();
                 }, 300);
             }, 3500);
+        }
+
+        // --- DIALOG MODAL CUSTOM UTILITY ---
+        function tampilkanModal(title, desc, callbackAction) {
+            const modal = document.getElementById('modal-container');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+
+            const actionsBox = document.getElementById('modal-action-buttons');
+            actionsBox.innerHTML = `
+                <button onclick="tutupModal()" class="flex-1 py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition-all">Batal</button>
+                <button id="modal-btn-confirm" class="flex-1 py-3 px-4 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs transition-all">Lanjutkan</button>
+            `;
+
+            document.getElementById('modal-btn-confirm').onclick = callbackAction;
+            modal.classList.remove('hidden');
+        }
+
+        function tutupModal() {
+            document.getElementById('modal-container').classList.add('hidden');
         }
     </script>
 </body>
